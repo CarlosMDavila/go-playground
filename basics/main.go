@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand/v2"
+	"time"
 )
 
 func main() {
@@ -16,6 +17,12 @@ func main() {
 	embeddedStructExample()
 	fmt.Print("\n\n")
 	interfaceExample()
+	fmt.Print("\n\n")
+	whileExample()
+	fmt.Print("\n\n")
+	variadicFunctionExample()
+	fmt.Print("\n\n")
+	structMapKeyExample()
 }
 
 func pointerExample() {
@@ -102,5 +109,43 @@ func interfaceExample() {
 		case Square:
 			fmt.Println("The area of the square is:", s.Area())
 		}
+	}
+}
+
+func whileExample() {
+	fmt.Println("***WHILE (FOR SIMULATION) USAGE EXAMPLE***")
+	countDown := 5
+	for countDown > 0 {
+		fmt.Println("Ticks left: ", countDown)
+		time.Sleep(500 * time.Millisecond)
+		countDown--
+	}
+	fmt.Println("Timer has reached 0.")
+}
+
+func variadicFunctionExample() {
+	fmt.Println("***VARIADIC USAGE EXAMPLE***")
+	printStrings("THIS", "ARE", "PARAMETERED", "VALUES")
+
+	stringSlice := []string{"THIS", "IS", "A", "SLICE"}
+	printStrings(stringSlice...)
+}
+
+func printStrings(strings ...string) {
+	for _, str := range strings {
+		fmt.Println("Input word:", str)
+	}
+}
+
+func structMapKeyExample() {
+	fmt.Println("***STRUCT MAP KEY USAGE EXAMPLE***")
+
+	carSales := make(map[Car]int)
+	carSales[Car{maker: "Toyota", model: "Camry"}] = 10
+	carSales[Car{maker: "Mazda", model: "CX-5"}] = 20
+	carSales[Car{maker: "Toyota", model: "Prius"}] = 30
+
+	for key, value := range carSales {
+		fmt.Println(key.maker, "sold", value, key.model)
 	}
 }
